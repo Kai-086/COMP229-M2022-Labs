@@ -1,0 +1,43 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add mine-types
+
+PATH: 
+  C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\oracle\instantclient_12_2;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Users\Kai\AppData\Local\Microsoft\WindowsApps;C:\Users\Kai\.dotnet\tools;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\oracle\instantclient_12_2\;C:\oracle\instantclient_12_2\vc14;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Git\cmd;%NVM_HOME%;%NVM_SYMLINK%;C:\Users\Kai\AppData\Local\Microsoft\WindowsApps;C:\oracle\instantclient_12_2;C:\Users\Kai\.dotnet\tools;C:\Users\Kai\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Kai\AppData\Roaming\nvm;C:\Program Files\nodejs
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  18.1.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/mine-types: Not found
+      at params.callback [as _callback] (C:\Users\Kai\AppData\Roaming\nvm\v18.1.0\node_modules\yarn\lib\cli.js:66138:18)
+      at self.callback (C:\Users\Kai\AppData\Roaming\nvm\v18.1.0\node_modules\yarn\lib\cli.js:140883:22)
+      at Request.emit (node:events:527:28)
+      at Request.<anonymous> (C:\Users\Kai\AppData\Roaming\nvm\v18.1.0\node_modules\yarn\lib\cli.js:141855:10)
+      at Request.emit (node:events:527:28)
+      at IncomingMessage.<anonymous> (C:\Users\Kai\AppData\Roaming\nvm\v18.1.0\node_modules\yarn\lib\cli.js:141777:12)
+      at Object.onceWrapper (node:events:641:28)
+      at IncomingMessage.emit (node:events:539:35)
+      at endReadableNT (node:internal/streams/readable:1344:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "comp229-m2022-week2",
+    "version": "0.0.1",
+    "description": "demo project for COMP229 in the M2022 semester at Centennial College",
+    "main": "server.js",
+    "author": "Kai",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
