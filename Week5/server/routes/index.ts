@@ -2,25 +2,24 @@ import express from 'express';
 const router = express.Router();
 
 // Import the controller module
-import {DisplayAboutPage, DisplayContactUs, DisplayHomePage, DisplayOurProject, DisplayOurServices} from "../Controllers/index";
+import { DisplayAboutPage, DisplayContactPage, DisplayHomePage, DisplayProjectsPage, DisplayServicesPage } from "../Controllers/index";
 
-// Call the function from Controllers to here and replace
 /* Display home page. */
 router.get('/', DisplayHomePage);
 
 /* Display home page. */
-router.get('home', DisplayHomePage);
+router.get('/home', DisplayHomePage);
 
 /* Display about page. */
 router.get('/about', DisplayAboutPage);
 
 /* Display projects page. */
-router.get('/projects', DisplayOurProject);
+router.get('/projects', DisplayProjectsPage);
 
 /* Display services page. */
-router.get('/services', DisplayOurServices);
+router.get('/services', DisplayServicesPage);
 
 /* Display contact page. */
-router.get('/contact', DisplayContactUs);
+router.get('/contact', DisplayContactPage);
 
 export default router;
