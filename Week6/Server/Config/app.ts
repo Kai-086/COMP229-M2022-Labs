@@ -4,23 +4,39 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-// Step 1 - Import db package
+// Import db package
 import mongoose from 'mongoose';
+
+// Step - For auth - import modules
+import session from 'express-session';
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import flash from 'connect-flash';
+
+// Modules for JWT support 
+import cors from 'cors';
+
+// Step 2 - For auth - define our auth objects
+let localStrategy = passportLocal.Strategy; // Alias
+
+// Step 3 - For auth - import the user model
+import User from '../Models/user'; 
 
 // Import the router data
 import indexRouter from '../Routes/index';  // Top-level routes
 import movieListRouter from '../Routes/movie-list'; // Movie-list routes
+import authRouter from '../Routes/auth'; // Authentication routes
 
 const app = express();
 
-// Step 2 - Configuration
+// Configuration
 import * as DBConfig from './db';
 
 mongoose.connect(DBConfig.LocalURI);
 
 const db = mongoose.connection; // Alias for the mongoose connection
 
-// Step 3 - Listen for Connections or Errors
+// Listen for Connections or Errors
 db.on("open", function() {
   console.log(`Connected to MongoDB at: ${DBConfig.HostName}`);
 });
@@ -33,6 +49,7 @@ db.on("error", function() {
 app.set('views', path.join(__dirname, '../Views'));
 app.set('view engine', 'ejs');
 
+// View engine setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,8 +57,33 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../Client')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+app.use(cors()); // Adds CORS (cross-origin resource sharing) to the config
+
+// Step 4 - For auth - setup express session
+app.use(session({
+  secret: DBConfig.Secret,
+  saveUninitialized: false,
+  resave: false
+}));
+
+// Step 5 - Setup Flash
+app.use(flash());
+
+// Step 6 - Initialize session and passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Step 7 - Implement the Auth strategy
+passport.use(User.createStrategy());
+
+// Step 8 - Setup serialization and deserialization (encoding and decoding)
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// User routes
 app.use('/', indexRouter);
 app.use('/', movieListRouter);
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) 
