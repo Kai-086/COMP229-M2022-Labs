@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Step 2 - Create a Schema that matches the data
+// Password should be HASH, thus it shouldn't put here
 const UserSchema = new Schema({
     Display: String,
     username: String,
