@@ -60,7 +60,11 @@ function ProcessRegisterPage(req, res, next) {
 }
 exports.ProcessRegisterPage = ProcessRegisterPage;
 function ProcessLogoutPage(req, res, next) {
-    req.logOut(function () {
+    req.logOut(function (err) {
+        if (err) {
+            console.error(err);
+            res.end(err);
+        }
         console.log("User Logged Out");
     });
     res.redirect('/login');

@@ -74,7 +74,11 @@ export function ProcessRegisterPage(req: express.Request, res: express.Response,
 }
 
 export function ProcessLogoutPage(req: express.Request, res: express.Response, next: express.NextFunction){
-    req.logOut(function() {
+    req.logOut(function(err) {
+        if(err) {
+            console.error(err);
+            res.end(err);
+        }
         console.log("User Logged Out");
     });
 
