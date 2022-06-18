@@ -6,7 +6,7 @@ export function UserDisplayName(req: Express.Request): string {
         let user = req.user as UserDocument
         return user.DisplayName.toString();
     }
-    return ''; // If user not exist
+    return " "; // If user not exist
 }
 
 // Helper middleware function for guarding secure locations
