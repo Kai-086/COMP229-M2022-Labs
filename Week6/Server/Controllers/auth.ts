@@ -44,9 +44,36 @@ export function ProcessLoginPage(req: express.Request, res: express.Response, ne
 }
  
 export function ProcessRegisterPage(req: express.Request, res: express.Response, next: express.NextFunction){
-  
+    // Instantiate a new user object
+    let newUser = new User({
+        username: req.body.username,
+        EmailAddress: req.body.emailAddress,
+        DisplayName: req.body.firstName + " " + req.body.lastName
+    });
+
+    User.register(newUser, req.body.password, function(err) {
+        if(err) {
+            if(err.name == "UserExistsError") {
+                console.error('ERROR: User Already Exists!');
+                req.flash('registerMessage', 'Registration Error!');
+            }
+            else {
+                console.error(err.name); //Other error
+                req.flash('registerMessage', 'Server Error');
+            }
+            return res.redirect('/register');
+        }
+
+        // Everything is ok - user has been registered
+
+        // Automatically login the user
+        return passport.authenticate('local')(req, res, function() {
+            return res.redirect('/movie-list');
+        });
+    });
 }
 
 export function ProcessLogoutPage(req: express.Request, res: express.Response, next: express.NextFunction){
-    
+    req.logOut();
+    res.redirect('/login');
 }
