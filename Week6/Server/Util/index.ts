@@ -4,6 +4,8 @@ import express from 'express';
 export function UserDisplayName(req: express.Request): string {
     if(req.user) {
         let user = req.user as UserDocument
+        console.log(user);
+        console.log(user.DisplayName);
         return user.DisplayName.toString();
     }
     return ''; // If user not exist
