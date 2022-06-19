@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Step 2 - Create a Schema that matches the data
-const MoviesSchema = new Schema({
+const MovieSchema = new Schema({
     Name: String,
     Year: String,
     Director: String,
@@ -15,7 +15,7 @@ const MoviesSchema = new Schema({
 });
 
 // Step 3 - Create a Model using the Schema
-const Model = mongoose.model("Movies", MoviesSchema);
+const Model = mongoose.model("Movies", MovieSchema);
 
 // Step 4 - Export the Model -> this makes the file a module
 export default Model;

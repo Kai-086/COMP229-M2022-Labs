@@ -10,14 +10,14 @@ const user_1 = __importDefault(require("../Models/user"));
 const Util_1 = require("../Util");
 function DisplayLoginPage(req, res, next) {
     if (!req.user) {
-        res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
+        return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
     }
     return res.redirect('/movie-list');
 }
 exports.DisplayLoginPage = DisplayLoginPage;
 function DisplayRegisterPage(req, res, next) {
     if (!req.user) {
-        res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
+        return res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: (0, Util_1.UserDisplayName)(req) });
     }
     return res.redirect('/movie-list');
 }
@@ -32,7 +32,7 @@ function ProcessLoginPage(req, res, next) {
             req.flash('loginMessage', 'Authentication Error!');
             return res.redirect('/login');
         }
-        req.login(user, function (err) {
+        req.logIn(user, function (err) {
             if (err) {
                 console.error(err);
                 res.end(err);

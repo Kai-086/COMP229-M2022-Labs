@@ -2,7 +2,7 @@
 
 import app from './Server/Config/app';
 import debug from 'debug';
-debug('Week5:server');
+debug('Week6:server');
 import http from 'http';
 import { HttpError } from 'http-errors';
 

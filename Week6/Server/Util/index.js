@@ -6,7 +6,7 @@ function UserDisplayName(req) {
         let user = req.user;
         return user.DisplayName.toString();
     }
-    return " ";
+    return '';
 }
 exports.UserDisplayName = UserDisplayName;
 function AuthGuard(req, res, next) {

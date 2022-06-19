@@ -10,23 +10,24 @@ import User from '../Models/user';;
 import { UserDisplayName } from '../Util';
 
 /* Display Functions */
-export function DisplayLoginPage(req: express.Request, res: express.Response, next: express.NextFunction){
+export function DisplayLoginPage(req: express.Request, res: express.Response, next: express.NextFunction) {
     if(!req.user) {
-        res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: UserDisplayName(req) });
+        return res.render('index', { title: 'Login', page: 'login', messages: req.flash('loginMessage'), displayName: UserDisplayName(req)});
     }
     return res.redirect('/movie-list');
 }
 
-export function DisplayRegisterPage(req: express.Request, res: express.Response, next: express.NextFunction){
+export function DisplayRegisterPage(req: express.Request, res: express.Response, next: express.NextFunction) {
     if(!req.user) {
-        res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: UserDisplayName(req) });
+        return res.render('index', { title: 'Register', page: 'register', messages: req.flash('registerMessage'), displayName: UserDisplayName(req)});
     }
     return res.redirect('/movie-list');
 }
+
 
 /* Processing Functions */
-export function ProcessLoginPage(req: express.Request, res: express.Response, next: express.NextFunction){
-    passport.authenticate('local', function(err, user, info) {
+export function ProcessLoginPage(req: express.Request, res: express.Response, next: express.NextFunction) {
+   passport.authenticate('local', function(err, user, info) {
         // Are there server errors?
         if(err) {
             console.error(err);
@@ -40,7 +41,7 @@ export function ProcessLoginPage(req: express.Request, res: express.Response, ne
         }
 
         // No problem - we have a good username and password
-        req.login(user, function(err) {
+        req.logIn(user, function(err) {
             // Are there DB errors?
             if(err) {
                 console.error(err);
@@ -52,7 +53,7 @@ export function ProcessLoginPage(req: express.Request, res: express.Response, ne
     })(req, res, next);
 }
  
-export function ProcessRegisterPage(req: express.Request, res: express.Response, next: express.NextFunction){
+export function ProcessRegisterPage(req: express.Request, res: express.Response, next: express.NextFunction) {
     // Instantiate a new user object
     let newUser = new User({
         username: req.body.username,
@@ -67,7 +68,7 @@ export function ProcessRegisterPage(req: express.Request, res: express.Response,
                 req.flash('registerMessage', 'Registration Error!');
             }
             else {
-                console.error(err.name); //Other error
+                console.error(err.name); // Other error
                 req.flash('registerMessage', 'Server Error');
             }
             return res.redirect('/register');
@@ -82,14 +83,14 @@ export function ProcessRegisterPage(req: express.Request, res: express.Response,
     });
 }
 
-export function ProcessLogoutPage(req: express.Request, res: express.Response, next: express.NextFunction){
+export function ProcessLogoutPage(req: express.Request, res: express.Response, next: express.NextFunction) {
     req.logOut(function(err) {
         if(err) {
             console.error(err);
             res.end(err);
         }
+
         console.log("User Logged Out");
     });
-
     res.redirect('/login');
 }
